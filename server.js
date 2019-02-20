@@ -1,27 +1,6 @@
 import { ApolloServer, gql } from 'apollo-server';
-
-const products = {
-  1: {
-    id: 1,
-    sku: 't-shirt',
-    title: 'T-Shirt',
-    description: 'A pretty awesome T-shirt',
-    price: 999,
-  },
-  2: {
-    id: 2,
-    sku: 'mug',
-    title: 'Mug',
-    description: 'A pretty awesome coffee mug',
-    price: 499,
-  },
-};
-
-const cart = {
-  items: [],
-  currency: 'USD',
-  total: 0,
-};
+import cart from './cart';
+import products from './products';
 
 const typeDefs = gql`
   type Query {
