@@ -40,6 +40,18 @@ export default {
     this.recalculate();
   },
 
+  remove(productId) {
+    const itemIndex = this.items.findIndex(line => line.product.id === productId);
+
+    if (itemIndex < 0) {
+      throw new Error('Item does not exist');
+    }
+
+    this.items.splice(itemIndex, 1);
+
+    this.recalculate();
+  },
+
   recalculate() {
     this.total = 0;
 

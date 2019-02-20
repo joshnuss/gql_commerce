@@ -51,6 +51,14 @@ const resolvers = {
 
       return cart;
     },
+
+    remove: (obj, args, { cart }) => {
+      const productId = Number.parseInt(args.productId);
+
+      cart.remove(productId);
+
+      return cart;
+    },
   },
 };
 
