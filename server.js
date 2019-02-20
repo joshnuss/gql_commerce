@@ -99,5 +99,5 @@ const server = new ApolloServer({
   context: { cart, products }
 });
 
-server.listen(4001)
+server.listen()
   .then(({ url }) => console.log(`Listening on ${url}`));
