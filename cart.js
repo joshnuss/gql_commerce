@@ -52,6 +52,11 @@ export default {
     this.recalculate();
   },
 
+  empty() {
+    this.items = [];
+    this.recalculate();
+  },
+
   recalculate() {
     this.total = 0;
 

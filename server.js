@@ -52,6 +52,15 @@ const resolvers = {
       return cart;
     },
 
+    update: (obj, args, { cart }) => {
+      const productId = Number.parseInt(args.productId);
+      const quantity = args.quantity || 1;
+
+      cart.update(productId, quantity);
+
+      return cart;
+    },
+
     remove: (obj, args, { cart }) => {
       const productId = Number.parseInt(args.productId);
 
@@ -59,6 +68,12 @@ const resolvers = {
 
       return cart;
     },
+
+    empty: (obj, args, { cart }) => {
+      cart.empty();
+
+      return cart;
+    }
   },
 };
 
