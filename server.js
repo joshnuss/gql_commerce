@@ -38,9 +38,7 @@ const typeDefs = gql`
 `;
 const resolvers = {
   Query: {
-    cart: (obj, args, { cart }) => {
-      return cart;
-    }
+    cart: (obj, args, { cart }) => cart,
   },
   Mutation: {
     add: (obj, args, { cart }) => {
