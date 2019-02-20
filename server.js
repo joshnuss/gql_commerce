@@ -69,6 +69,24 @@ const resolvers = {
       return cart;
     },
 
+    increment: (obj, args, { cart }) => {
+      const productId = Number.parseInt(args.productId);
+      const by = args.by || 1;
+
+      cart.increment(productId, by);
+
+      return cart;
+    },
+
+    decrement: (obj, args, { cart }) => {
+      const productId = Number.parseInt(args.productId);
+      const by = args.by || 1;
+
+      cart.decrement(productId, by);
+
+      return cart;
+    },
+
     empty: (obj, args, { cart }) => {
       cart.empty();
 

@@ -40,6 +40,34 @@ export default {
     this.recalculate();
   },
 
+  increment(productId, by) {
+    const item = this.items.find(line => line.product.id === productId);
+
+    if (!item) {
+      throw new Error('Item does not exist');
+    }
+
+    this.update(productId, item.quantity + by);
+  },
+
+  decrement(productId, by) {
+    const item = this.items.find(line => line.product.id === productId);
+
+    if (!item) {
+      throw new Error('Item does not exist');
+    }
+
+    if (item.quantity < by) {
+      throw new Error(`Cannot decrement by ${by}`);
+    }
+
+    if (item.quantity === by) {
+      this.remove(productId);
+    } else {
+      this.update(productId, item.quantity - by);
+    }
+  },
+
   remove(productId) {
     const itemIndex = this.items.findIndex(line => line.product.id === productId);
 
