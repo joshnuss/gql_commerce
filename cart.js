@@ -43,10 +43,10 @@ export default {
   recalculate() {
     this.total = 0;
 
-    for (const item of this.items) {
+    this.items.forEach((item) => {
       item.subtotal = item.product.price * item.quantity;
 
       this.total += item.subtotal;
-    }
+    });
   },
 };
