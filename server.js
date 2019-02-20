@@ -43,27 +43,11 @@ const resolvers = {
     }
   },
   Mutation: {
-    add: (obj, args, { cart, products }) => {
+    add: (obj, args, { cart }) => {
       const productId = Number.parseInt(args.productId);
-      const product = products[productId];
-
-      if (!product) {
-        throw new Error('Unknown product');
-      }
-
-      const item = cart.items.find(line => line.product.id === productId);
       const quantity = args.quantity || 1;
 
-      if (item) {
-        item.quantity += quantity;
-        item.subtotal = product.price * item.quantity;
-      } else {
-        cart.items.push({
-          product,
-          quantity,
-          subtotal: product.price * quantity,
-        });
-      }
+      cart.add(productId, quantity);
 
       return cart;
     },
