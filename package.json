@@ -5,7 +5,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "lint": "eslint ."
   },
   "dependencies": {
     "apollo-server": "^2.4.2",
@@ -15,6 +16,9 @@
     "graphql": "^14.1.1"
   },
   "devDependencies": {
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
     "nodemon": "^1.18.10"
   }
 }
