@@ -15,14 +15,38 @@ export default {
     const item = this.items.find(line => line.product.id === productId);
 
     if (item) {
-      item.quantity += quantity;
-      item.subtotal = product.price * item.quantity;
+      this.update(productId, item.quantity + quantity);
     } else {
       this.items.push({
         product,
         quantity,
         subtotal: product.price * quantity,
       });
+
+      this.recalculate();
     }
-  }
+  },
+
+  update(productId, quantity) {
+    const item = this.items.find(line => line.product.id === productId);
+
+    if (!item) {
+      throw new Error('Item does not exist');
+    }
+
+    item.quantity = quantity;
+    item.subtotal = item.product.price * item.quantity;
+
+    this.recalculate();
+  },
+
+  recalculate() {
+    this.total = 0;
+
+    for (const item of this.items) {
+      item.subtotal = item.product.price * item.quantity;
+
+      this.total += item.subtotal;
+    }
+  },
 };
