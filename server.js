@@ -5,7 +5,8 @@ import pubsub from './pubsub';
 
 const typeDefs = gql`
   type Query {
-    cart: Cart
+    products: [Product!]!
+    cart: Cart!
   }
 
   type CartItem {
@@ -44,10 +45,11 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    cart: (obj, args, { cart }) => cart,
+    products: (_, args, { products }) => Object.values(products),
+    cart: (_, args, { cart }) => cart,
   },
   Mutation: {
-    add: (obj, args, { cart }) => {
+    add: (_, args, { cart }) => {
       const productId = Number.parseInt(args.productId);
       const quantity = args.quantity || 1;
 
@@ -56,7 +58,7 @@ const resolvers = {
       return cart;
     },
 
-    update: (obj, args, { cart }) => {
+    update: (_, args, { cart }) => {
       const productId = Number.parseInt(args.productId);
       const quantity = args.quantity || 1;
 
@@ -65,7 +67,7 @@ const resolvers = {
       return cart;
     },
 
-    remove: (obj, args, { cart }) => {
+    remove: (_, args, { cart }) => {
       const productId = Number.parseInt(args.productId);
 
       cart.remove(productId);
@@ -73,7 +75,7 @@ const resolvers = {
       return cart;
     },
 
-    increment: (obj, args, { cart }) => {
+    increment: (_, args, { cart }) => {
       const productId = Number.parseInt(args.productId);
       const by = args.by || 1;
 
@@ -82,7 +84,7 @@ const resolvers = {
       return cart;
     },
 
-    decrement: (obj, args, { cart }) => {
+    decrement: (_, args, { cart }) => {
       const productId = Number.parseInt(args.productId);
       const by = args.by || 1;
 
@@ -91,7 +93,7 @@ const resolvers = {
       return cart;
     },
 
-    empty: (obj, args, { cart }) => {
+    empty: (_, args, { cart }) => {
       cart.empty();
 
       return cart;
