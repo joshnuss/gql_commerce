@@ -1,4 +1,5 @@
 import products from './products';
+import pubsub from './pubsub';
 
 export default {
   items: [],
@@ -24,6 +25,7 @@ export default {
       });
 
       this.recalculate();
+      this.fireChanged();
     }
   },
 
@@ -34,10 +36,16 @@ export default {
       throw new Error('Item does not exist');
     }
 
+    const oldQuantity = item.quantity;
+
     item.quantity = quantity;
     item.subtotal = item.product.price * item.quantity;
 
     this.recalculate();
+
+    if (oldQuantity !== quantity) {
+      this.fireChanged();
+    }
   },
 
   increment(productId, by) {
@@ -78,11 +86,13 @@ export default {
     this.items.splice(itemIndex, 1);
 
     this.recalculate();
+    this.fireChanged();
   },
 
   empty() {
     this.items = [];
     this.recalculate();
+    this.fireChanged();
   },
 
   recalculate() {
@@ -93,5 +103,9 @@ export default {
 
       this.total += item.subtotal;
     });
+  },
+
+  fireChanged() {
+    pubsub.publish('cartChanged', { cartChanged: this });
   },
 };

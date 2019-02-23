@@ -1,6 +1,7 @@
 import { ApolloServer, gql } from 'apollo-server';
 import cart from './cart';
 import products from './products';
+import pubsub from './pubsub';
 
 const typeDefs = gql`
   type Query {
@@ -35,7 +36,12 @@ const typeDefs = gql`
     decrement(productId: ID!, by: Int): Cart!
     empty: Cart!
   }
+
+  type Subscription {
+    cartChanged: Cart!
+  }
 `;
+
 const resolvers = {
   Query: {
     cart: (obj, args, { cart }) => cart,
@@ -91,6 +97,11 @@ const resolvers = {
       return cart;
     }
   },
+  Subscription: {
+    cartChanged: {
+      subscribe: () => pubsub.asyncIterator('cartChanged')
+    },
+  }
 };
 
 const server = new ApolloServer({
