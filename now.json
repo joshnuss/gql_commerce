@@ -1,4 +1,5 @@
 {
   "version": 1,
-  "name": "gql_commerce"
+  "name": "gql_commerce",
+  "alias": "gqlc.now.sh"
 }
