@@ -1,6 +1,4 @@
 {
-  "version": 2,
-  "name": "gql_commerce",
-  "builds": [{ "src": "index.js", "use": "@now/node-server" }],
-  "routes": [{ "src": "/.*", "dest": "index.js" }]
+  "version": 1,
+  "name": "gql_commerce"
 }
