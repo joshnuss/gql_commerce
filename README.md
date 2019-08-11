@@ -13,3 +13,7 @@ Open http://localhost:4000/graphql
 ```bash
 now
 ```
+
+## License
+
+No license. Copyright 2019 Josh Nussbaum
