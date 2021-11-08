@@ -11,7 +11,7 @@
     "deploy": "now --public && now alias"
   },
   "dependencies": {
-    "apollo-server": "^2.14.2",
+    "apollo-server": "^2.25.3",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
